@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Skills
+{% endblock %}
+
+{%block content%}
+<h1>MY SKILLS</h1>
+
+      {%for i in range(0, len)%}
+  
+    <li>{{skill[i]}}</li>
+{%endfor%}
+
+
+{%endblock%}
