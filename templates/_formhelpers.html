@@ -1,0 +1,13 @@
+{% macro render_field(field, placeHolder, reqMethod) %}
+<div class="{% if field.label.text=='Name' or field.label.text=='Email'%}col-md-6{% endif %} form-group">
+    {% if field.errors %} {% set validateStyle = ' is-invalid' if reqMethod == 'POST' else ' ' %} {{field(placeholder = placeHolder, class = "form-control"+validateStyle)}}
+    <div class="invalid-feedback" id="{{field.label.text}}" style="display: block">
+        {% for error in field.errors %} {{error}} {% endfor %}
+    </div>
+    {% else %} {% set validateStyle = ' is-valid' if reqMethod == 'POST' else ' ' %} {{field(placeholder = placeHolder, class = "form-control"+validateStyle)}} {% if reqMethod == 'POST' %}
+    <div class="valid-feedback" style="display: block">Looks good!</div>
+    {% endif %} {% endif %}
+</div>
+{% endmacro %}
+
+<!-- Method GET -->

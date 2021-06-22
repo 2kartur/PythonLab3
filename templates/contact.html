@@ -1,3 +1,4 @@
+{% from "_formhelpers.html" import render_field %}
 {% extends 'base.html' %}
 
 {% block title %}
@@ -12,6 +13,29 @@ Contact
       <p>+380684749**</p>
       <p class="lead">ADDRESS:</p>
       <p>Pasichna st. 41 </p>
+
+<div class="col-lg-8 mt-5 mt-lg-0">
+                <form action="{{ url_for('contact') }}" method="POST" role="form" class="php-email-form" novalidate>
+                    <div class="form-row">
+
+                        {{form.csrf_token}} {% if session.get('name') is none %} {{ render_field(form.name, "Your Name", reqMethod) }} {{ render_field(form.email, "Your Email", reqMethod) }} {% endif %}
+                    </div>
+                    {{ render_field(form.subject, "Subject", reqMethod) }} {{ render_field(form.message, "Message", reqMethod) }}
+                    <div class="mb-3">
+                        {% set messages = get_flashed_messages(with_categories=True) %} {% if messages %} {% for ctg, msg in messages %}
+                        <div class="alert alert-{% if ctg == 'message' %}success{% endif %}{% if ctg == 'error' %}danger{% endif %}" role="alert">
+                            {{ msg }}
+                        </div>
+                        {% endfor %} {% endif %}
+                    </div>
+                    <div class="text-center">
+                        <button id="submitBtn" type="submit">Send Message</button>
+                    </div>
+                </form>
+            </div>
+
+
+
 
 
 {%endblock%}
