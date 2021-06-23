@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Skills
+{% endblock %}
+
+{%block content%}
+ {%from "_render_field.html" import render_field%}
+ <div class="form-wrapper" align="center">
+      <form method="POST" action="{{ url_for('task_create') }}">
+                  {{form.csrf_token}}
+                  {{ render_field(form.title) }}
+                  {{ render_field(form.description) }}
+                  {{ render_field(form.priority) }}
+          <br>
+          {{ form.submit(class="btn btn-light btn-lg") }}
+      </form>
+</div>
+{%endblock%}
